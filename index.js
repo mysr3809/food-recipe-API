@@ -22,3 +22,29 @@ function getInputValue() {
   }
   renderMeal(inputVal);
 }
+
+async function renderMeal(meal) {
+  const data = await foodApi(FOOD_URL + meal);
+  console.log(data);
+  const mealList = document.querySelector('.mealList');
+
+
+  let col = '';
+  data.meals.forEach(meal => {
+    col += `
+          <div class="col m-2">
+            <div class="card" style="width: 18rem;">
+              <img src="${meal.strMealThumb}" style="height:100%" class="card-img-top" alt="meal">
+              <div class="card-body">
+              <h4>${meal.strMeal}</h4>
+                <button type="button" onclick='showRecipe("${meal.strMeal}")' class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                See Recipe
+                </button>
+              </div>
+            </div>
+          </div>
+      `;
+
+    mealList.innerHTML = col;
+  })
+}
