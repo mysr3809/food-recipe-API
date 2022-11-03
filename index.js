@@ -9,3 +9,16 @@ const foodApi = async (url) => {
 
   return data;
 }
+
+inputEl.style.width = '50%';
+function getInputValue() {
+  // Selecting the input element and get its value 
+  const inputVal = document.getElementById("inputText").value;
+  if (inputVal === '') {
+    alert('You shoud text a food')
+  } else {
+    // Displaying the value
+    console.log(inputVal);
+  }
+  renderMeal(inputVal);
+}
