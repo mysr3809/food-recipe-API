@@ -28,8 +28,8 @@ async function renderMeal(meal) {
   const mealList = document.querySelector('.mealList');
   data.meals.forEach(meal => {
     col += `
-          <div class="col m-2">
-            <div class="card" style="width: 18rem;">
+          <div class="meals col-xl-4 col-lg-4 col-sm-6 col-xs-12  m-0">
+            <div class="card mealCard" style="width: 18rem;">
               <img src="${meal.strMealThumb}" style="height:100%" class="card-img-top" alt="meal">
               <div class="card-body">
               <h4>${meal.strMeal}</h4>
@@ -48,18 +48,18 @@ async function renderMeal(meal) {
 const showRecipe = async (mealId) => {  // show instruction in the modal
   let recipe = '';
   let step = '';
+  let modalTitle = '';
   const response = await fetch(RECIPE_URL + mealId); //fetc instruction of the recipe
   const data = await response.json();
   const recipeBox = document.getElementById('recipeBox');
-  recipe =  //all the instructions about meal
-    `
-     ${data.meals[0].strInstructions}
-    `;
+  const modalTitleEl = document.querySelector('.modal-title');
+
+  recipe = `${data.meals[0].strInstructions}`; //all the instructions about meal
+  modalTitle = `<p>${data.meals[0].strMeal}</p>`;
+  modalTitleEl.innerHTML = modalTitle;
   const resultArr = recipe.split('\r\n'); // split the instructions according to recipe steps
   resultArr.forEach(recipe => {
-    step += `
-             <p>${recipe}</p>
-            `
+    step += `<p>${recipe}</p>`;
   });
   recipeBox.innerHTML = step;
 };

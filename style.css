@@ -1,5 +1,43 @@
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+.header{
+  width: 100%;
+  height: 150px;
+  background-color: #F96666;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  position: relative;
+}
+#cookerLogo{
+  width: 150px;
+  position: absolute;
+  left: 0;
+  border-radius: 50%;
+}
+
+.mealList {
+  margin: auto !important;
+  grid-row-gap: 10px;
+}
+.meals {
+  display: grid;
+  justify-content: center;
+}
+.mealCard:hover {
+  box-shadow: 10px 10px 15px rgb(0 0 0 / 40%);
+  transition: all 1s;
+}
+.input-group{
+  width: 40% !important;
+}
+body {
+  width: 100%;
+  height: 100%;
+  background-color: #EEEEEE !important;
 }
