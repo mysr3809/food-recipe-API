@@ -28,7 +28,7 @@ async function renderMeal(meal) {
   const mealList = document.querySelector('.mealList');
   data.meals.forEach(meal => {
     col += `
-          <div class="meals col-xl-4 col-lg-4 col-sm-6 col-xs-12  m-0">
+          <div class="meals col-xl-4 col-lg-6 col-sm-12  m-0">
             <div class="card mealCard" style="width: 18rem;">
               <img src="${meal.strMealThumb}" style="height:100%" class="card-img-top" alt="meal">
               <div class="card-body">

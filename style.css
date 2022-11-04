@@ -20,10 +20,15 @@
   left: 0;
   border-radius: 50%;
 }
+.recipeBox{
+  font-size: 1rem;
+}
+
 
 .mealList {
   margin: auto !important;
   grid-row-gap: 10px;
+  width: 85%;
 }
 .meals {
   display: grid;
