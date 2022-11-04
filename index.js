@@ -2,11 +2,23 @@ const FOOD_URL = `https://www.themealdb.com/api/json/v1/1/filter.php?i=`;
 const RECIPE_URL = 'https://www.themealdb.com/api/json/v1/1/lookup.php?i=';
 const inputEl = document.querySelector('.input-group');
 
+const startPage = () => {
+  const headerEl = document.querySelector('.header');
+  headerEl.style.display = 'none';
+
+}
+const startBtn = () => {
+  const startPageEl = document.querySelector('.startPage');
+  startPageEl.style.display = 'none';
+  const headerEl = document.querySelector('.header');
+  headerEl.style.display = 'all';
+}
+
+
 const foodApi = async (url) => {
   const response = await fetch(url); //fetch Food Api
   // console.log('response', response);
   const data = await response.json(); //get the data as JSON format 
-
   return data;
 }
 
@@ -65,3 +77,4 @@ const showRecipe = async (mealId) => {  // show instruction in the modal
 };
 
 
+window.addEventListener('load', startPage);
