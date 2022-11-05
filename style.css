@@ -25,7 +25,6 @@
   align-items: center;
   margin-bottom: 20px;
   position: relative;
-  display: none;
 }
 
 .headerText{
@@ -42,6 +41,14 @@
 }
 .recipeBox{
   font-size: 1rem;
+  overflow-y: scroll;
+}
+
+.modal{
+  position: absolute !important;
+  height: 80% !important;
+  overflow-y: auto;
+  top: 10% !important;
 }
 .mealList {
   margin: auto !important;
@@ -58,7 +65,7 @@
 }
 .input-group{
   width: 40% !important;
-  top: 30%;
+  top: 10%;
 
 }
 body {

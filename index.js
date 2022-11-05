@@ -1,18 +1,14 @@
 const FOOD_URL = `https://www.themealdb.com/api/json/v1/1/filter.php?i=`;
 const RECIPE_URL = 'https://www.themealdb.com/api/json/v1/1/lookup.php?i=';
 const inputEl = document.querySelector('.input-group');
+const headerLogoEl = document.getElementById('cookerLogo');
+const startPageEl = document.querySelector('.startPage'); // hidden start page content
+
 
 const startPage = () => {
-  const headerEl = document.querySelector('.header');
-  headerEl.style.display = 'none';
+  headerLogoEl.style.display = 'none';
+}
 
-}
-const startBtn = () => {
-  const startPageEl = document.querySelector('.startPage');
-  startPageEl.style.display = 'none';
-  const headerEl = document.querySelector('.header');
-  headerEl.style.display = 'all';
-}
 
 
 const foodApi = async (url) => {
@@ -29,6 +25,8 @@ function getInputValue() {
   if (inputVal === '') {
     alert('You shoud text a food') //there is no input throw an alert
   } else {
+    startPageEl.style.display = 'none';
+    headerLogoEl.style.display = 'block';
     // Displaying the value
     renderMeal(inputVal);
   }
