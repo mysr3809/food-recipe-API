@@ -3,12 +3,18 @@
   padding: 0;
   box-sizing: border-box;
 }
+body {
+  width: 100%;
+  height: 100%;
+  background-color: #EEEEEE !important;
+}
 
 .startPage{
   display: flex;
   align-items: center;
   flex-direction: column;
   text-align: center;
+  font-family: 'Amatic SC', cursive;
 }
 
 .startLogo{
@@ -27,21 +33,38 @@
   position: relative;
 }
 
+.favoriteMeal{
+  display: flex;
+}
+.numberFav{
+  display: flex;
+  position: relative;
+}
+.heartFav{
+  position: absolute;
+  font-size: 2.5rem;
+  color: white;
+}
+.textFav{
+  position: absolute;
+ color: red;
+ left: 15px;
+  top: px;
+}
+
 .headerText{
   position: absolute;
   color: white;
   text-align: center;
   top: 10%;
+  font-family: 'Amatic SC', cursive;
 }
 #cookerLogo{
   width: 150px;
   position: absolute;
   left: 0;
   border-radius: 50%;
-}
-.recipeBox{
-  font-size: 1rem;
-  
+  display: none;
 }
 
 .modal{
@@ -63,32 +86,66 @@
   box-shadow: 10px 10px 15px rgb(0 0 0 / 40%);
   transition: all 1s;
 }
+
 .input-group{
   width: 40%;
   top: 10%;
+}
+.logoText{
+  position: absolute;
+  top: 10%;
+  color:white;
+  display: none;
+  font-family: 'Amatic SC', cursive;
+  }
 
-}
-body {
-  width: 100%;
-  height: 100%;
-  background-color: #EEEEEE !important;
-}
+ 
+  .heartIcon{
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: red;
+    font-size: 1.5rem;
+    opacity: 0;
+    transition: all 1s;
+    transform: translate(0px, 0px);
+    cursor: pointer;
+  }
+  .mealCard:hover .heartIcon{
+   opacity: 1;
+   transition: all 1s;
+   top: 5px;
+   right: 5px;
+  }
+
+/* Favorite Meals */
+  .favBtn{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+  }
+
+
 
 
 @media (max-width: 600px) {
   .header{
-    display: flex;    
+    display: flex; 
+    height: 180px;   
   }
   #cookerLogo{
-    width: 100px;
-    left: 50%;
-    top: 0%;
-    transform: translate(-50%);
+    width: 120px;
+    left: 5px;
+    top: 5px;
   }
   .input-group{
     width: 100% !important;
     top: 45%;
     transform: translate(0, -50%);
   }
+ .logoText{
+  top: 33%;
+  left: 30%;
+ }
   
 }

@@ -9,32 +9,48 @@
   <link rel="stylesheet" href="style.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
+
+  <!-- Create header,input,logo and button -->
   <div class="header">
+    <h2 class="logoText">Welcome to Jorien Chef's Kitchen</h2>
     <img id='cookerLogo' src="https://i.pinimg.com/originals/f2/9c/25/f29c2569b3c004a34eafa236647c6287.jpg" alt="">
     <div class="input-group m-3">
-      <input id="inputText" type="text" class="form-control" aria-label="Text input with segmented dropdown button">
+      <input id="inputText" type="text" placeholder="Write an ingredient" class="form-control"
+        aria-label="Text input with segmented dropdown button">
       <button type="button" onclick="getInputValue()" class="btn btn-success">Search</button>
       </button>
     </div>
   </div>
-
-  <div class="startPage" >
-    <img class="startLogo" src="https://i.pinimg.com/originals/f2/9c/25/f29c2569b3c004a34eafa236647c6287.jpg" alt="">
-    <h2>Welcome to Jorien Chef's Kitchen <br> You can find delicious dishes and their recipes in this website.</h2>
+  
+  <!-- Show welcome content -->
+  <div class="container">
+    <div class="startPage">
+      <h2 class="startPageText">Welcome to Jorien Chef's Kitchen</h2>
+      <img class="startLogo" src="https://i.pinimg.com/originals/f2/9c/25/f29c2569b3c004a34eafa236647c6287.jpg" alt="">
+      <h3 class="startPageText"> <span style="color: red;">What will you cook today?</span> <br> <span style="color: green;" >Doesn't something come to mind?</span> 
+        <br> <span style="color: blue;">Finding food is now easier</span>  <br>  You can find delicious dishes and their recipes in this website.
+      </h3>
+    </div>
   </div>
 
-  <div class="recipeContainer">
+<!-- Create meal list section -->
+  <div class="mealContainer">
     <div class="row mealList">
 
     </div>
   </div>
 
-  <div class="modal fade"  id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" >
-      <div class="modal-content" >
+  <!-- Create modal for recipe -->
+  <div class="modal fade" id="recipe" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel"></h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -48,6 +64,37 @@
       </div>
     </div>
   </div>
+
+  <!-- Create Favorite Button and Modal -->
+  <div class="favoriteMeal"> 
+    <button type="button" class="btn btn-warning favBtn" data-bs-toggle="modal" data-bs-target="#favMeals">
+      Favorite Meals
+    </button>
+    <div class="modal fade" id="favMeals" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Favorite Meals</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+            <!-- Create Fav Meals List -->
+          <div class="modal-body ">
+            <div class="favContainer">
+              <div class="row favList">
+          
+              </div>
+            </div>
+            
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
 
 
 
