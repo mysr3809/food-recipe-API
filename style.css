@@ -135,7 +135,7 @@ body {
   }
   #cookerLogo{
     width: 120px;
-    left: 5px;
+    left: 10px;
     top: 5px;
   }
   .input-group{
@@ -145,7 +145,7 @@ body {
   }
  .logoText{
   top: 33%;
-  left: 30%;
+  left: 40%;
  }
   
 }
