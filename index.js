@@ -76,7 +76,7 @@ const addFavourate = (mealName, mealId, mealImg) => {
     favArr.push(obj);
     favList += `
     <div class="meals  col-lg-6 col-sm-12  m-0">
-      <div class="card mealCard" style="width: 18rem;">
+      <div class="card favCard" style="width: 18rem;">
         <img src="${mealImg}" style="height:100%" class="card-img-top" alt="meal">
         <div class="card-body">
         <h4>${mealName}</h4>

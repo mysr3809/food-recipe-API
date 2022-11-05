@@ -119,10 +119,20 @@ body {
   }
 
 /* Favorite Meals */
+.favContainer{
+  text-align: center;
+}
   .favBtn{
     position: absolute;
     top: 5px;
     right: 5px;
+  }
+  .favCard{
+    margin: 10px;
+  }
+  .favCard .card-body{
+    background-color: #F96666;
+    color: white;
   }
 
 
@@ -134,9 +144,9 @@ body {
     height: 180px;   
   }
   #cookerLogo{
-    width: 120px;
+    width: 100px;
     left: 10px;
-    top: 5px;
+    top: 15px;
   }
   .input-group{
     width: 100% !important;
