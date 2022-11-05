@@ -41,7 +41,7 @@
 }
 .recipeBox{
   font-size: 1rem;
-  overflow-y: scroll;
+  
 }
 
 .modal{
@@ -86,7 +86,7 @@ body {
     transform: translate(-50%);
   }
   .input-group{
-    width: 50% !important;
+    width: 100% !important;
     top: 45%;
     transform: translate(0, -50%);
   }
