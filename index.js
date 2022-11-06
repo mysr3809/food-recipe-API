@@ -5,6 +5,8 @@ const headerLogoEl = document.getElementById('cookerLogo');
 const startPageEl = document.querySelector('.startPage'); // hidden start page content
 const logoTextEl = document.querySelector('.logoText')
 const inputVal = document.getElementById("inputText");
+const favListEl = document.querySelector('.favList');
+
 
 
 const startPage = () => {
@@ -15,6 +17,7 @@ const startPage = () => {
     logoTextEl.style.display = 'block';
     inputVal.value = searchedMeal.toString();
     renderMeal(searchedMeal);
+    showFavorite();
   } else {
     startPageEl.style.display = 'all';
   }
@@ -78,7 +81,6 @@ async function renderMeal(meal) {
 const favArr = [];
 let favList = '';
 const addFavourate = (mealName, mealId, mealImg) => {
-  const favListEl = document.querySelector('.favList');
   const obj = {
     meal: mealName,
     id: mealId,
@@ -99,10 +101,29 @@ const addFavourate = (mealName, mealId, mealImg) => {
   `;
     localStorage.setItem('favArr', favArr); // store favorite meals in the local storage and show it again after refresh the page
   }
-
   favListEl.innerHTML = favList;
   console.log(favArr)
 }
+
+const showFavorite = () => {
+  const favArr = localStorage.getItem('favArr');
+  console.log(favArr)
+  let template = '';
+  favArr.forEach(eachMeal => {
+    template += `
+     <div class="meals  col-lg-6 col-sm-12  m-0">
+    <div class="card favCard" style="width: 18rem;">
+      <img src="${eachMeal.img}" style="height:100%" class="card-img-top" alt="meal">
+      <div class="card-body">
+      <h4>${eachMeal.name}</h4>
+      </div>
+    </div>
+  </div>
+`
+  })
+  favListEl.innerHTML = template;
+}
+
 
 const showRecipe = async (mealId) => {  // show instruction in the modal
   let recipe = '';
