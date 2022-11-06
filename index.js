@@ -4,9 +4,20 @@ const inputEl = document.querySelector('.input-group');
 const headerLogoEl = document.getElementById('cookerLogo');
 const startPageEl = document.querySelector('.startPage'); // hidden start page content
 const logoTextEl = document.querySelector('.logoText')
+const inputVal = document.getElementById("inputText");
 
 
 const startPage = () => {
+  const searchedMeal = localStorage.getItem('searchedMeal');
+  if (searchedMeal) {
+    startPageEl.style.display = 'none';
+    headerLogoEl.style.display = 'block';
+    logoTextEl.style.display = 'block';
+    inputVal.value = searchedMeal.toString();
+    renderMeal(searchedMeal);
+  } else {
+    startPageEl.style.display = 'all';
+  }
 }
 
 
@@ -32,6 +43,8 @@ function getInputValue() {
     // Displaying the value
     renderMeal(inputVal);
   }
+  localStorage.setItem('searchedMeal', inputVal)
+
 }
 
 async function renderMeal(meal) {
@@ -84,6 +97,7 @@ const addFavourate = (mealName, mealId, mealImg) => {
       </div>
     </div>
   `;
+    localStorage.setItem('favArr', favArr); // store favorite meals in the local storage and show it again after refresh the page
   }
 
   favListEl.innerHTML = favList;
