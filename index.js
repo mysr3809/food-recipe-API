@@ -135,7 +135,9 @@ const showRecipe = async (mealId) => {  // show instruction in the modal
   const modalTitleEl = document.querySelector('.modal-title');
 
   recipe = `${data.meals[0].strInstructions}`; //all the instructions about meal
-  modalTitle = `<p>${data.meals[0].strMeal}</p>`;
+  modalTitle = `
+  <p>${data.meals[0].strMeal}</p>
+  <a href='${data.meals[0].strYoutube}' target=”_blank”>Go to Recipe Video</a>`;
   modalTitleEl.innerHTML = modalTitle;
   const resultArr = recipe.split('\r\n'); // split the instructions according to recipe steps
   resultArr.forEach(recipe => {
