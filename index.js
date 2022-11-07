@@ -4,20 +4,20 @@ const inputEl = document.querySelector('.input-group');
 const headerLogoEl = document.getElementById('cookerLogo');
 const startPageEl = document.querySelector('.startPage'); // hidden start page content
 const logoTextEl = document.querySelector('.logoText')
-const inputVal = document.getElementById("inputText");
+const inputVal = document.getElementById("inputText").value;
 const favListEl = document.querySelector('.favList');
 
 
 
 const startPage = () => {
   const searchedMeal = localStorage.getItem('searchedMeal');
+  console.log(searchedMeal)
   if (searchedMeal) {
     startPageEl.style.display = 'none';
     headerLogoEl.style.display = 'block';
     logoTextEl.style.display = 'block';
     inputVal.value = searchedMeal.toString();
     renderMeal(searchedMeal);
-    showFavorite();
   } else {
     startPageEl.style.display = 'all';
   }
@@ -26,17 +26,28 @@ const startPage = () => {
 
 
 const foodApi = async (url) => {
-  const response = await fetch(url); //fetch Food Api
-  // console.log('response', response);
-  const data = await response.json(); //get the data as JSON format 
-  return data;
+  try {
+    const response = await fetch(url); //fetch Food Api
+    if (!response.ok) {
+      throw new Error('There is some error on API.')
+    }
+
+    // console.log('response', response);
+    const data = await response.json(); //get the data as JSON format 
+
+    if (data.meals === null) {
+      throw new Error('data is null');
+    }
+    return data;
+  } catch (err) {
+    alert(err)
+  }
+
 }
 
-inputEl.style.width = '50%';
 function getInputValue() {
-
-  // Selecting the input element and get its value 
   const inputVal = document.getElementById("inputText").value;
+  // Selecting the input element and get its value 
   if (inputVal === '') {
     alert('You shoud text a food') //there is no input throw an alert
   } else {
@@ -47,36 +58,44 @@ function getInputValue() {
     renderMeal(inputVal);
   }
   localStorage.setItem('searchedMeal', inputVal)
-
 }
 
 async function renderMeal(meal) {
-  let col = '';
-  const data = await foodApi(FOOD_URL + meal);
   const mealList = document.querySelector('.mealList');
-  data.meals.forEach(meal => {
-    // const obj = {
-    //   meal: meal.strMeal,
-    //   id: meal.idMeal
-    // }
-    col += `
-          <div class="meals col-xl-4 col-lg-6 col-sm-12  m-0">
-            <div class="card mealCard" style="width: 18rem;">
-              <a class="heartBtn" onclick="addFavourate('${meal.strMeal}','${meal.idMeal}','${meal.strMealThumb}') "><i class="fa-solid fa-heart heartIcon"></i></a> 
-              <img src="${meal.strMealThumb}" style="height:100%" class="card-img-top" alt="meal">
-              <div class="card-body">
-              <h4>${meal.strMeal}</h4>
-                <button type="button" onclick='showRecipe("${meal.idMeal}")' class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#recipe">
-                See Recipe
-                </button>
-              </div>
-            </div>
+  let col = '';
+  try {
+    const data = await foodApi(FOOD_URL + meal);
+    if (data === undefined) {
+      throw new Error(err)
+    }
+    console.log('data: ', data);
+    for (let meal of data.meals) {
+      col += `
+      <div class="meals col-xl-4 col-lg-6 col-sm-12  m-0">
+        <div class="card mealCard" style="width: 18rem;">
+          <a class="heartBtn" onclick="addFavourate('${meal.strMeal}','${meal.idMeal}','${meal.strMealThumb}') "><i class="fa-solid fa-heart heartIcon"></i></a> 
+          <img src="${meal.strMealThumb}" style="height:100%" class="card-img-top" alt="meal">
+          <div class="card-body">
+          <h4>${meal.strMeal}</h4>
+            <button type="button" onclick='showRecipe("${meal.idMeal}")' class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#recipe">
+            See Recipe
+            </button>
           </div>
-      `;
+        </div>
+      </div>
+  `;
+    }
+  } catch (err) {
+    console.log(err);
+  }
+  mealList.innerHTML = col;
+};
+// data.meals.forEach(meal => {
+// const obj = {
+//   meal: meal.strMeal,
+//   id: meal.idMeal
+// }
 
-    mealList.innerHTML = col;
-  })
-}
 
 const favArr = [];
 let favList = '';
@@ -109,18 +128,18 @@ const showFavorite = () => {
   const favArr = localStorage.getItem('favArr');
   console.log(favArr)
   let template = '';
-  favArr.forEach(eachMeal => {
+  for (let meal of favArr) {
     template += `
-     <div class="meals  col-lg-6 col-sm-12  m-0">
-    <div class="card favCard" style="width: 18rem;">
-      <img src="${eachMeal.img}" style="height:100%" class="card-img-top" alt="meal">
-      <div class="card-body">
-      <h4>${eachMeal.name}</h4>
-      </div>
-    </div>
-  </div>
+    <div class="meals  col-lg-6 col-sm-12  m-0">
+   <div class="card favCard" style="width: 18rem;">
+     <img src="${meal.img}" style="height:100%" class="card-img-top" alt="meal">
+     <div class="card-body">
+     <h4>${meal.name}</h4>
+     </div>
+   </div>
+ </div>
 `
-  })
+  }
   favListEl.innerHTML = template;
 }
 

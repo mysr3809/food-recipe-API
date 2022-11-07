@@ -112,7 +112,7 @@ body {
     top: 0;
     right: 0;
     color: red;
-    font-size: 1.5rem;
+    font-size: 2rem;
     opacity: 0;
     transition: all 1s;
     transform: translate(0px, 0px);
@@ -150,7 +150,7 @@ footer{
   right: 0;
   width: 100%;
   margin-top: 20px;
-  
+  position: relative;
 }
 
 
