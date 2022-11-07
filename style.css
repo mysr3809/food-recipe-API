@@ -75,7 +75,7 @@ body {
 }
 .mealList {
   margin: auto !important;
-  grid-row-gap: 10px;
+  grid-row-gap: 20px;
   width: 85%;
 }
 .meals {
@@ -86,9 +86,12 @@ body {
   box-shadow: 10px 10px 15px rgb(0 0 0 / 40%);
   transition: all 1s;
 }
+.card-body{
+  text-align: center;
+}
 
 .input-group{
-  width: 40%;
+  width: 40% !important;
   top: 10%;
 }
 .logoText{
@@ -117,6 +120,9 @@ body {
    top: 5px;
    right: 5px;
   }
+  .heartIcon:active{
+    color: rgb(63, 1, 1);
+  }
 
 /* Favorite Meals */
 .favContainer{
@@ -135,7 +141,12 @@ body {
     color: white;
   }
 
-
+footer{
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  margin-top: 20px;
+}
 
 
 @media (max-width: 600px) {
