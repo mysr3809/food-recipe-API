@@ -4,13 +4,15 @@ const inputEl = document.querySelector('.input-group');
 const headerLogoEl = document.getElementById('cookerLogo');
 const startPageEl = document.querySelector('.startPage'); // hidden start page content
 const logoTextEl = document.querySelector('.logoText')
-const inputVal = document.getElementById("inputText").value;
+let inputVal = document.getElementById("inputText");
 const favListEl = document.querySelector('.favList');
+const searchedMeal = localStorage.getItem('searchedMeal');
+
+
 
 
 
 const startPage = () => {
-  const searchedMeal = localStorage.getItem('searchedMeal');
   console.log(searchedMeal)
   if (searchedMeal) {
     startPageEl.style.display = 'none';
@@ -57,10 +59,10 @@ function getInputValue() {
     // Displaying the value
     renderMeal(inputVal);
   }
-  localStorage.setItem('searchedMeal', inputVal)
 }
 
 async function renderMeal(meal) {
+  const inputVal = document.getElementById("inputText").value;
   const mealList = document.querySelector('.mealList');
   let col = '';
   try {
@@ -68,7 +70,8 @@ async function renderMeal(meal) {
     if (data === undefined) {
       throw new Error(err)
     }
-    console.log('data: ', data);
+    localStorage.setItem('searchedMeal', inputVal)
+    console.log(inputVal);
     for (let meal of data.meals) {
       col += `
       <div class="meals col-xl-4 col-lg-6 col-sm-12  m-0">
