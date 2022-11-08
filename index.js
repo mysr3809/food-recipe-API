@@ -1,16 +1,12 @@
 const FOOD_URL = `https://www.themealdb.com/api/json/v1/1/filter.php?i=`;
 const RECIPE_URL = 'https://www.themealdb.com/api/json/v1/1/lookup.php?i=';
-const inputEl = document.querySelector('.input-group');
 const headerLogoEl = document.getElementById('cookerLogo');
 const startPageEl = document.querySelector('.startPage'); // hidden start page content
 const logoTextEl = document.querySelector('.logoText')
-let inputVal = document.getElementById("inputText");
+let inputEl = document.getElementById("inputText");
 const favListEl = document.querySelector('.favList');
 const searchedMeal = localStorage.getItem('searchedMeal');
-
-
-
-
+const mealList = document.querySelector('.mealList');
 
 const startPage = () => {
   console.log(searchedMeal)
@@ -18,60 +14,54 @@ const startPage = () => {
     startPageEl.style.display = 'none';
     headerLogoEl.style.display = 'block';
     logoTextEl.style.display = 'block';
-    inputVal.value = searchedMeal.toString();
+    inputEl.value = searchedMeal.toString();
     renderMeal(searchedMeal);
   } else {
     startPageEl.style.display = 'all';
   }
 }
 
-
-
 const foodApi = async (url) => {
   try {
     const response = await fetch(url); //fetch Food Api
     if (!response.ok) {
-      throw new Error('There is some error on API.')
+      renderError('There is some error on API.')
     }
 
-    // console.log('response', response);
     const data = await response.json(); //get the data as JSON format 
-
     if (data.meals === null) {
+      col = '';
       throw new Error('data is null');
     }
     return data;
   } catch (err) {
-    alert(err)
+    renderError(err)
   }
-
 }
 
 function getInputValue() {
-  const inputVal = document.getElementById("inputText").value;
+  const inputEl = document.getElementById("inputText");
   // Selecting the input element and get its value 
-  if (inputVal === '') {
-    alert('You shoud text a food') //there is no input throw an alert
+  if (inputEl.value === '') {
+    renderError('You shoud text a food') //there is no input throw an alert
   } else {
     startPageEl.style.display = 'none';
     headerLogoEl.style.display = 'block';
     logoTextEl.style.display = 'block'
     // Displaying the value
-    renderMeal(inputVal);
+    renderMeal(inputEl.value);
   }
 }
 
 async function renderMeal(meal) {
-  const inputVal = document.getElementById("inputText").value;
-  const mealList = document.querySelector('.mealList');
   let col = '';
   try {
     const data = await foodApi(FOOD_URL + meal);
     if (data === undefined) {
-      throw new Error(err)
+      throw new Error('There is a problem. Please check your ingredient!')
     }
-    localStorage.setItem('searchedMeal', inputVal)
-    console.log(inputVal);
+    localStorage.setItem('searchedMeal', inputEl.value)
+    console.log(inputEl.value);
     for (let meal of data.meals) {
       col += `
       <div class="meals col-xl-4 col-lg-6 col-sm-12  m-0">
@@ -89,15 +79,23 @@ async function renderMeal(meal) {
   `;
     }
   } catch (err) {
-    console.log(err);
+    renderError(err);
   }
   mealList.innerHTML = col;
 };
-// data.meals.forEach(meal => {
-// const obj = {
-//   meal: meal.strMeal,
-//   id: meal.idMeal
-// }
+
+const renderError = (err) => {
+  const html = `
+    <div class='alert alert-danger'>
+      ${err}
+    </div>
+  `;
+  setTimeout(() => {
+    document.getElementById('errors').innerHTML = '';
+
+  }, 3000);
+  document.getElementById('errors').innerHTML = html;
+}
 
 
 const favArr = [];

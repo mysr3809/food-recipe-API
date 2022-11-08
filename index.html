@@ -27,64 +27,38 @@
       <button type="button" id="searchBtn" onclick="getInputValue()" class="btn btn-success">Search</button>
       </button>
     </div>
+    <div id="errors"></div>
+
   </div>
-  
+  <div class="pageContainer">
   <!-- Show welcome content -->
-  <div class="container">
-    <div class="startPage">
-      <h2 class="startPageText">Welcome to Jorien Chef's Kitchen</h2>
-      <img class="startLogo" src="https://i.pinimg.com/originals/f2/9c/25/f29c2569b3c004a34eafa236647c6287.jpg" alt="">
-      <h3 class="startPageText"> <span style="color: red;">What will you cook today?</span> <br> <span style="color: green;" >Doesn't something come to mind?</span> 
-        <br> <span style="color: blue;">Finding food is now easier</span>  <br>  You can find delicious dishes and their recipes in this website.
-      </h3>
-    </div>
-  </div>
-
-<!-- Create meal list section -->
-  <div class="mealContainer">
-    <div class="row mealList">
-
-    </div>
-  </div>
-
-  <!-- Create modal for recipe -->
-  <div class="modal fade" id="recipe" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel"></h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div id="recipeBox" class="modal-body">
-
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-        </div>
+    <div class="container mealContainer">
+      <div class="startPage">
+        <h2 class="startPageText">Welcome to Jorien Chef's Kitchen</h2>
+        <img class="startLogo" src="https://i.pinimg.com/originals/f2/9c/25/f29c2569b3c004a34eafa236647c6287.jpg" alt="">
+        <h3 class="startPageText"> <span style="color: red;">What will you cook today?</span> <br> <span style="color: green;" >Doesn't something come to mind?</span> 
+          <br> <span style="color: blue;">Finding food is now easier</span>  <br>  You can find delicious dishes and their recipes in this website.
+        </h3>
       </div>
     </div>
-  </div>
 
-  <!-- Create Favorite Button and Modal -->
-  <div class="favoriteMeal"> 
-    <button type="button" class="btn btn-warning favBtn" data-bs-toggle="modal" data-bs-target="#favMeals">
-      Favorite Meals
-    </button>
-    <div class="modal fade" id="favMeals" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-lg">
+  <!-- Create meal list section -->
+    <div class="mealContainer">
+      <div class="row mealList">
+
+      </div>
+    </div>
+
+    <!-- Create modal for recipe -->
+    <div class="modal fade" id="recipe" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Favorite Meals</h5>
+            <h5 class="modal-title" id="exampleModalLabel"></h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-            <!-- Create Fav Meals List -->
-          <div class="modal-body ">
-            <div class="favContainer">
-              <div class="row favList">
-          
-              </div>
-            </div>
-            
+          <div id="recipeBox" class="modal-body">
+
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
@@ -92,17 +66,45 @@
         </div>
       </div>
     </div>
-  </div>
 
-  <footer class="bg-light text-center text-lg-start">
-    <!-- Copyright -->
-    <div class="text-center p-5" style="background-color: rgba(0, 0, 0, 0.2);">
-      M.Yasar © 2022 Copyright:
-      <a class="text-dark" href="#">Jorien's Kitchen</a>
+    <!-- Create Favorite Button and Modal -->
+    <div class="favoriteMeal"> 
+      <button type="button" class="btn btn-warning favBtn" data-bs-toggle="modal" data-bs-target="#favMeals">
+        Favorite Meals
+      </button>
+      <div class="modal fade" id="favMeals" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Favorite Meals</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+              <!-- Create Fav Meals List -->
+            <div class="modal-body ">
+              <div class="favContainer">
+                <div class="row favList">
+            
+                </div>
+              </div>
+              
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <!-- Copyright -->
-  </footer>
 
+    <footer class="bg-light text-center text-lg-start">
+      <!-- Copyright -->
+      <div class="text-center p-5" style="background-color: rgba(0, 0, 0, 0.2);">
+        M.Yasar © 2022 Copyright:
+        <a class="text-dark" href="#">Jorien's Kitchen</a>
+      </div>
+      <!-- Copyright -->
+    </footer>
+</div>
   
 
 

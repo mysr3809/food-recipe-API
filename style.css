@@ -49,6 +49,28 @@ body {
   font-size: 2.5rem;
   color: white;
 }
+
+.heartIcon{
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: red;
+  font-size: 2rem;
+  opacity: 0;
+  transition: all 1s;
+  transform: translate(0px, 0px);
+  cursor: pointer;
+}
+.mealCard:hover .heartIcon{
+ opacity: 1;
+ transition: all 1s;
+ top: 5px;
+ right: 5px;
+}
+
+.heartIcon:active{
+  color: rgb(63, 1, 1);
+}
 .textFav{
   position: absolute;
  color: red;
@@ -69,6 +91,17 @@ body {
   left: 0;
   border-radius: 50%;
   display: none;
+}
+#errors{
+  position: absolute;
+  width: 40%;
+  text-align: center;
+  bottom: -10px;
+}
+.alert{
+  font-size: 12px;
+  padding: 5px !important;
+ 
 }
 
 .modal{
@@ -106,27 +139,7 @@ body {
   font-family: 'Amatic SC', cursive;
   }
 
- 
-  .heartIcon{
-    position: absolute;
-    top: 0;
-    right: 0;
-    color: red;
-    font-size: 2rem;
-    opacity: 0;
-    transition: all 1s;
-    transform: translate(0px, 0px);
-    cursor: pointer;
-  }
-  .mealCard:hover .heartIcon{
-   opacity: 1;
-   transition: all 1s;
-   top: 5px;
-   right: 5px;
-  }
-  .heartIcon:active{
-    color: rgb(63, 1, 1);
-  }
+
 
 /* Favorite Meals */
 .favContainer{
@@ -172,6 +185,10 @@ footer{
  .logoText{
   top: 33%;
   right: 5px;
+ }
+ #errors{
+  width: 90%;
+  bottom: -50px;
  }
   
 }
