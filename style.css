@@ -123,6 +123,13 @@ body {
   display: grid;
   justify-content: center;
 }
+.resultTitle{
+  text-align: center;
+  margin-bottom: 5px;
+}
+.resultNumber{
+  color: red;
+}
 .mealCard:hover {
   box-shadow: 10px 10px 15px rgb(0 0 0 / 40%);
   transition: all 1s;

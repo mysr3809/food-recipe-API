@@ -8,6 +8,7 @@ let inputEl = document.getElementById("inputText");
 const favListEl = document.querySelector('.favList');
 const searchedMeal = localStorage.getItem('searchedMeal');
 const mealList = document.querySelector('.mealList');
+const resultEl = document.querySelector('.result');
 
 const startPage = () => {  // call renderMeal func. if there is an input
   if (searchedMeal) {
@@ -20,16 +21,21 @@ const startPage = () => {  // call renderMeal func. if there is an input
 }
 
 async function renderMeal(meal) {
-  let col = '';
+
   try {
+    let col = '';
+    let resultText = '';
     const data = await foodApi(FOOD_URL + meal); // added input value end of the url and call the func with async await
     if (data === undefined) { // checked wrong value in input and wrong response from data
+      resultEl.innerHTML = resultText;
+      mealList.innerHTML = col;
       startPageEl.style.display = 'block';
       startPageTitle.style.display = 'inline';
       headerLogoEl.style.display = 'none';
       logoTextEl.style.display = 'none';
       throw new Error('Please check your ingredient!'); // throw an error depend on wrong response and 
     }
+    resultText = `<h4 class='resultTitle'> Your Search Result: <span class='resultNumber'>${data.meals.length}</span> Meal Found</h4> `;
     headerLogoEl.style.display = 'block'; // if the response is correct, func. will continue 
     logoTextEl.style.display = 'block';
     localStorage.setItem('searchedMeal', inputEl.value) // set input value in localStorage
@@ -49,10 +55,11 @@ async function renderMeal(meal) {
       </div>
   `;
     }
+    resultEl.innerHTML = resultText;
+    mealList.innerHTML = col;
   } catch (err) {
     renderError(err);
   }
-  mealList.innerHTML = col;
 };
 
 const foodApi = async (url) => {
@@ -95,6 +102,7 @@ const showAllMeal = async () => {
   localStorage.setItem('searchedMeal', '');
   mealList.innerHTML = '';
   let col = '';
+  let resultText = '';
   try {
     const data = await foodApi(FOOD_URL);
     for (let meal of data.meals) {
@@ -113,10 +121,14 @@ const showAllMeal = async () => {
       </div>
   `;
     }
+    resultText = `<h4 class='resultTitle'> Your Search Result: <span class='resultNumber'>${data.meals.length}</span> Meal Found</h4> `;
+    resultEl.innerHTML = resultText;
+    mealList.innerHTML = col;
+
   } catch (err) {
     renderError(err);
   }
-  mealList.innerHTML = col;
+
 };
 
 const renderError = (err) => {
@@ -161,6 +173,7 @@ const showRecipe = async (mealId) => {  // show instruction in the modal
   let recipe = '';
   let step = '';
   let modalTitle = '';
+
   const response = await fetch(RECIPE_URL + mealId); //fetch another API for instruction of the recipe
   if (!response.ok) { // to avoid an error from API
     throw new Error(err);
