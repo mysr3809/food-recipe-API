@@ -69,7 +69,6 @@ const foodApi = async (url) => {
       renderError('There is some error on API.')
     }
     const data = await response.json(); //get the data as JSON format 
-    console.log(data.meals)
     if (data.meals === null) { // checked if the ingredient is wrong and throw an error
       col = '';
       throw new Error(err);
