@@ -58,7 +58,7 @@ async function renderMeal(meal) {
   try {
     const data = await foodApi(FOOD_URL + meal);
     if (data === undefined) {
-      throw new Error('There is a problem. Please check your ingredient!')
+      throw new Error('Please check your ingredient!')
     }
     localStorage.setItem('searchedMeal', inputEl.value)
     console.log(inputEl.value);
