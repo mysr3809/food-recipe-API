@@ -58,7 +58,7 @@ async function renderMeal(meal) {
   try {
     const data = await foodApi(FOOD_URL + meal);
     if (data === undefined) {
-      startPageEl.style.display = 'block';
+      startPageEl.h2.style.display = 'inline-block';
       headerLogoEl.style.display = 'none';
       logoTextEl.style.display = 'none';
       throw new Error('Please check your ingredient!');
