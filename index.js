@@ -43,7 +43,7 @@ function getInputValue() {
   const inputEl = document.getElementById("inputText");
   // Selecting the input element and get its value 
   if (inputEl.value === '') {
-    renderError('You shoud text a food') //there is no input throw an alert
+    renderError('You should text a food') //there is no input throw an alert
   } else {
     startPageEl.style.display = 'none';
     headerLogoEl.style.display = 'block';
@@ -58,10 +58,50 @@ async function renderMeal(meal) {
   try {
     const data = await foodApi(FOOD_URL + meal);
     if (data === undefined) {
-      throw new Error('Please check your ingredient!')
+      startPageEl.style.display = 'block';
+      headerLogoEl.style.display = 'none';
+      logoTextEl.style.display = 'none';
+      throw new Error('Please check your ingredient!');
+
     }
     localStorage.setItem('searchedMeal', inputEl.value)
     console.log(inputEl.value);
+    for (let meal of data.meals) {
+      col += `
+      <div class="meals col-xl-4 col-lg-6 col-sm-12  m-0">
+        <div class="card mealCard" style="width: 18rem;">
+          <a class="heartBtn" onclick="addFavourate('${meal.strMeal}','${meal.idMeal}','${meal.strMealThumb}') "><i class="fa-solid fa-heart heartIcon"></i></a> 
+          <img src="${meal.strMealThumb}" style="height:100%" class="card-img-top" alt="meal">
+          <div class="card-body">
+          <h4>${meal.strMeal}</h4>
+            <button type="button" onclick='showRecipe("${meal.idMeal}")' class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#recipe">
+            See Recipe
+            </button>
+          </div>
+        </div>
+      </div>
+  `;
+    }
+  } catch (err) {
+    renderError(err);
+  }
+  mealList.innerHTML = col;
+};
+
+const showAllMeal = async () => {
+  startPageEl.style.display = 'none';
+  headerLogoEl.style.display = 'block';
+  logoTextEl.style.display = 'block';
+  inputEl.value = '';
+  localStorage.setItem('searchedMeal', '');
+  mealList.innerHTML = '';
+  let col = '';
+  try {
+    const data = await foodApi(FOOD_URL);
+    console.log(data.meals)
+    if (data === undefined) {
+      throw new Error('Please check your ingredient!')
+    }
     for (let meal of data.meals) {
       col += `
       <div class="meals col-xl-4 col-lg-6 col-sm-12  m-0">
