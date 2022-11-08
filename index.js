@@ -43,7 +43,7 @@ function getInputValue() {
   const inputEl = document.getElementById("inputText");
   // Selecting the input element and get its value 
   if (inputEl.value === '') {
-    renderError('You should text a food') //there is no input throw an alert
+    renderError('You should text an ingredient!') //there is no input throw an alert
   } else {
     startPageEl.style.display = 'none';
     headerLogoEl.style.display = 'block';
