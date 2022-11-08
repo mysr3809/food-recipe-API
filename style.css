@@ -17,6 +17,10 @@ body {
   font-family: 'Amatic SC', cursive;
 }
 
+.startPage h2{
+  background-color: darkorange;
+}
+
 .startLogo{
   width: 300px;
   border-radius: 50%;
