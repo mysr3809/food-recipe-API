@@ -174,7 +174,8 @@ footer{
 @media (max-width: 600px) {
   .header{
     display: flex; 
-    height: 180px;   
+    height: 180px; 
+    margin-bottom: 40px;  
   }
   #cookerLogo{
     width: 100px;
