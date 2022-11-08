@@ -19,50 +19,20 @@ const startPage = () => {  // call renderMeal func. if there is an input
   }
 }
 
-const foodApi = async (url) => {
-  try {
-    const response = await fetch(url); //fetch Food Api
-    if (!response.ok) {
-      renderError('There is some error on API.')
-    }
-
-    const data = await response.json(); //get the data as JSON format 
-    if (data.meals === null) {
-      col = '';
-      throw new Error('data is null');
-    }
-    return data;
-  } catch (err) {
-    renderError(err)
-  }
-}
-
-function getInputValue() {
-  const inputEl = document.getElementById("inputText");
-  // Selecting the input element and get its value 
-  if (inputEl.value === '') {
-    renderError('You should text an ingredient!') //there is no input throw an alert
-  } else {
-    startPageEl.style.display = 'none';
-    // Displaying the value
-    renderMeal(inputEl.value);
-  }
-}
-
 async function renderMeal(meal) {
   let col = '';
   try {
-    const data = await foodApi(FOOD_URL + meal);
-    if (data === undefined) {
+    const data = await foodApi(FOOD_URL + meal); // added input value end of the url and call the func with async await
+    if (data === undefined) { // checked wrong value in input and wrong response from data
       startPageEl.style.display = 'block';
       startPageTitle.style.display = 'inline';
       headerLogoEl.style.display = 'none';
       logoTextEl.style.display = 'none';
-      throw new Error('Please check your ingredient!');
+      throw new Error('Please check your ingredient!'); // throw an error depend on wrong response and 
     }
-    headerLogoEl.style.display = 'block';
+    headerLogoEl.style.display = 'block'; // if the response is correct, func. will continue 
     logoTextEl.style.display = 'block';
-    localStorage.setItem('searchedMeal', inputEl.value)
+    localStorage.setItem('searchedMeal', inputEl.value) // set input value in localStorage
     for (let meal of data.meals) {
       col += `
       <div class="meals col-xl-4 col-lg-6 col-sm-12  m-0">
@@ -85,6 +55,38 @@ async function renderMeal(meal) {
   mealList.innerHTML = col;
 };
 
+const foodApi = async (url) => {
+  try {
+    const response = await fetch(url); //fetch Food Api
+    if (!response.ok) {  // checked if there is an error from API
+      renderError('There is some error on API.')
+    }
+    const data = await response.json(); //get the data as JSON format 
+    console.log(data.meals)
+    if (data.meals === null) { // checked if the ingredient is wrong and throw an error
+      col = '';
+      throw new Error(err);
+    }
+    return data;
+  } catch (err) {
+    renderError(err)
+  }
+}
+
+function getInputValue() {
+  const inputEl = document.getElementById("inputText");
+  // Selecting the input element and get its value 
+  if (inputEl.value === '') {
+    renderError('You should text an ingredient!') //there is no input throw an alert
+  } else {
+    startPageEl.style.display = 'none';
+    // Displaying the value
+    renderMeal(inputEl.value);
+  }
+}
+
+
+
 const showAllMeal = async () => {
   startPageEl.style.display = 'none';
   headerLogoEl.style.display = 'block';
@@ -95,9 +97,6 @@ const showAllMeal = async () => {
   let col = '';
   try {
     const data = await foodApi(FOOD_URL);
-    if (data === undefined) {
-      throw new Error('Please check your ingredient!')
-    }
     for (let meal of data.meals) {
       col += `
       <div class="meals col-xl-4 col-lg-6 col-sm-12  m-0">
@@ -128,7 +127,6 @@ const renderError = (err) => {
   `;
   setTimeout(() => {
     document.getElementById('errors').innerHTML = '';
-
   }, 3000);
   document.getElementById('errors').innerHTML = html;
 }
@@ -142,7 +140,7 @@ const addFavourate = (mealName, mealId, mealImg) => {
     id: mealId,
     img: mealImg
   };
-  const found = favArr.find(element => element.id === mealId);
+  const found = favArr.find(element => element.id === mealId); // to avoid adding same meal again
   if (!found) {
     favArr.push(obj);
     favList += `
@@ -155,50 +153,31 @@ const addFavourate = (mealName, mealId, mealImg) => {
       </div>
     </div>
   `;
-    localStorage.setItem('favArr', favArr); // store favorite meals in the local storage and show it again after refresh the page
   }
   favListEl.innerHTML = favList;
 }
-
-const showFavorite = () => {
-  const favArr = localStorage.getItem('favArr');
-  let template = '';
-  for (let meal of favArr) {
-    template += `
-    <div class="meals  col-lg-6 col-sm-12  m-0">
-   <div class="card favCard" style="width: 18rem;">
-     <img src="${meal.img}" style="height:100%" class="card-img-top" alt="meal">
-     <div class="card-body">
-     <h4>${meal.name}</h4>
-     </div>
-   </div>
- </div>
-`
-  }
-  favListEl.innerHTML = template;
-}
-
 
 const showRecipe = async (mealId) => {  // show instruction in the modal
   let recipe = '';
   let step = '';
   let modalTitle = '';
-  const response = await fetch(RECIPE_URL + mealId); //fetc instruction of the recipe
+  const response = await fetch(RECIPE_URL + mealId); //fetch another API for instruction of the recipe
+  if (!response.ok) { // to avoid an error from API
+    throw new Error(err);
+  }
   const data = await response.json();
   const recipeBox = document.getElementById('recipeBox');
   const modalTitleEl = document.querySelector('.modal-title');
-
-  recipe = `${data.meals[0].strInstructions}`; //all the instructions about meal
   modalTitle = `
   <p>${data.meals[0].strMeal}</p>
   <a href='${data.meals[0].strYoutube}' target=”_blank”>Go to Recipe Video</a>`;
   modalTitleEl.innerHTML = modalTitle;
+  recipe = `${data.meals[0].strInstructions}`; //all the instructions about meal
   const resultArr = recipe.split('\r\n'); // split the instructions according to recipe steps
   resultArr.forEach(recipe => {
     step += `<p>${recipe}</p>`;
   });
   recipeBox.innerHTML = step;
 };
-
 
 window.addEventListener('load', startPage);
