@@ -12,11 +12,9 @@ const mealList = document.querySelector('.mealList');
 const startPage = () => {  // call renderMeal func. if there is an input
   if (searchedMeal) {
     startPageEl.style.display = 'none';
-    headerLogoEl.style.display = 'block';
-    logoTextEl.style.display = 'block';
     inputEl.value = searchedMeal.toString();
     renderMeal(searchedMeal);
-  } else { // if there is no value in localStorage, show startPage
+  } else { // if there is no value in localStorage show startPage
     startPageEl.style.display = 'all';
   }
 }
@@ -46,8 +44,6 @@ function getInputValue() {
     renderError('You should text an ingredient!') //there is no input throw an alert
   } else {
     startPageEl.style.display = 'none';
-    headerLogoEl.style.display = 'block';
-    logoTextEl.style.display = 'block'
     // Displaying the value
     renderMeal(inputEl.value);
   }
@@ -63,8 +59,9 @@ async function renderMeal(meal) {
       headerLogoEl.style.display = 'none';
       logoTextEl.style.display = 'none';
       throw new Error('Please check your ingredient!');
-
     }
+    headerLogoEl.style.display = 'block';
+    logoTextEl.style.display = 'block';
     localStorage.setItem('searchedMeal', inputEl.value)
     for (let meal of data.meals) {
       col += `
