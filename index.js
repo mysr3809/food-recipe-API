@@ -1,7 +1,7 @@
 const FOOD_URL = `https://www.themealdb.com/api/json/v1/1/filter.php?i=`;
 const RECIPE_URL = 'https://www.themealdb.com/api/json/v1/1/lookup.php?i=';
 const headerLogoEl = document.getElementById('cookerLogo');
-const startPageEl = document.querySelector('.startPage'); // hidden start page content
+const startPageEl = document.querySelector('.startPage'); // for hidden start page content
 const startPageTitle = document.querySelector('.startPageText')
 const logoTextEl = document.querySelector('.logoText')
 let inputEl = document.getElementById("inputText");
@@ -9,15 +9,14 @@ const favListEl = document.querySelector('.favList');
 const searchedMeal = localStorage.getItem('searchedMeal');
 const mealList = document.querySelector('.mealList');
 
-const startPage = () => {
-  console.log(searchedMeal)
+const startPage = () => {  // call renderMeal func. if there is an input
   if (searchedMeal) {
     startPageEl.style.display = 'none';
     headerLogoEl.style.display = 'block';
     logoTextEl.style.display = 'block';
     inputEl.value = searchedMeal.toString();
     renderMeal(searchedMeal);
-  } else {
+  } else { // if there is no value in localStorage, show startPage
     startPageEl.style.display = 'all';
   }
 }
@@ -67,7 +66,6 @@ async function renderMeal(meal) {
 
     }
     localStorage.setItem('searchedMeal', inputEl.value)
-    console.log(inputEl.value);
     for (let meal of data.meals) {
       col += `
       <div class="meals col-xl-4 col-lg-6 col-sm-12  m-0">
@@ -100,7 +98,6 @@ const showAllMeal = async () => {
   let col = '';
   try {
     const data = await foodApi(FOOD_URL);
-    console.log(data.meals)
     if (data === undefined) {
       throw new Error('Please check your ingredient!')
     }
@@ -164,12 +161,10 @@ const addFavourate = (mealName, mealId, mealImg) => {
     localStorage.setItem('favArr', favArr); // store favorite meals in the local storage and show it again after refresh the page
   }
   favListEl.innerHTML = favList;
-  console.log(favArr)
 }
 
 const showFavorite = () => {
   const favArr = localStorage.getItem('favArr');
-  console.log(favArr)
   let template = '';
   for (let meal of favArr) {
     template += `
