@@ -2,6 +2,7 @@ const FOOD_URL = `https://www.themealdb.com/api/json/v1/1/filter.php?i=`;
 const RECIPE_URL = 'https://www.themealdb.com/api/json/v1/1/lookup.php?i=';
 const headerLogoEl = document.getElementById('cookerLogo');
 const startPageEl = document.querySelector('.startPage'); // hidden start page content
+const startPageTitle = document.querySelector('.startPageText')
 const logoTextEl = document.querySelector('.logoText')
 let inputEl = document.getElementById("inputText");
 const favListEl = document.querySelector('.favList');
@@ -58,7 +59,8 @@ async function renderMeal(meal) {
   try {
     const data = await foodApi(FOOD_URL + meal);
     if (data === undefined) {
-      startPageEl.h2.style.display = 'inline-block';
+      startPageEl.style.display = 'block';
+      startPageTitle.style.display = 'inline';
       headerLogoEl.style.display = 'none';
       logoTextEl.style.display = 'none';
       throw new Error('Please check your ingredient!');
