@@ -33,7 +33,7 @@ async function renderMeal(meal) {
       startPageTitle.style.display = 'inline';
       headerLogoEl.style.display = 'none';
       logoTextEl.style.display = 'none';
-      throw new Error('Please check your ingredient!'); // throw an error depend on wrong response and 
+      return
     }
     resultText = `<h4 class='resultTitle'> Your Search Result: <span class='resultNumber'>${data.meals.length}</span> Meal Found</h4> `;
     headerLogoEl.style.display = 'block'; // if the response is correct, func. will continue 
@@ -66,12 +66,12 @@ const foodApi = async (url) => {
   try {
     const response = await fetch(url); //fetch Food Api
     if (!response.ok) {  // checked if there is an error from API
-      renderError('There is some error on API.')
+      throw new Error('There is some error on API.')
     }
     const data = await response.json(); //get the data as JSON format 
     if (data.meals === null) { // checked if the ingredient is wrong and throw an error
       col = '';
-      throw new Error(err);
+      throw new Error('Please check your ingredient!');
     }
     return data;
   } catch (err) {
@@ -104,6 +104,9 @@ const showAllMeal = async () => {
   let resultText = '';
   try {
     const data = await foodApi(FOOD_URL);
+    if (data == undefined) {
+      throw new Error('There is some error on API.')
+    }
     for (let meal of data.meals) {
       col += `
       <div class="meals col-xl-4 col-lg-6 col-sm-12  m-0">
