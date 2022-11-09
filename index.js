@@ -33,7 +33,7 @@ async function renderMeal(meal) {
       startPageTitle.style.display = 'inline';
       headerLogoEl.style.display = 'none';
       logoTextEl.style.display = 'none';
-      return
+      return; // with an error case it should be end with an error message
     }
     resultText = `<h4 class='resultTitle'> Your Search Result: <span class='resultNumber'>${data.meals.length}</span> Meal Found</h4> `;
     headerLogoEl.style.display = 'block'; // if the response is correct, func. will continue 
