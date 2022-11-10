@@ -4,7 +4,7 @@ const headerLogoEl = document.getElementById('cookerLogo');
 const startPageEl = document.querySelector('.startPage'); // for hidden start page content
 const startPageTitle = document.querySelector('.startPageText')
 const logoTextEl = document.querySelector('.logoText')
-let inputEl = document.getElementById("inputText");
+const inputEl = document.getElementById("inputText");
 const favListEl = document.querySelector('.favList');
 const searchedMeal = localStorage.getItem('searchedMeal');
 const mealList = document.querySelector('.mealList');
@@ -20,7 +20,7 @@ const startPage = () => {  // call renderMeal func. if there is an input
   }
 }
 
-async function renderMeal(meal) {
+const renderMeal = async (meal) => {
 
   try {
     let col = '';
@@ -79,7 +79,7 @@ const foodApi = async (url) => {
   }
 }
 
-function getInputValue() {
+const getInputValue = () => {
   const inputEl = document.getElementById("inputText");
   // Selecting the input element and get its value 
   if (inputEl.value === '') {
@@ -90,8 +90,6 @@ function getInputValue() {
     renderMeal(inputEl.value);
   }
 }
-
-
 
 const showAllMeal = async () => {
   startPageEl.style.display = 'none';
