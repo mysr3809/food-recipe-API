@@ -26,7 +26,7 @@ async function renderMeal(meal) {
     let col = '';
     let resultText = '';
     const data = await foodApi(FOOD_URL + meal); // added input value end of the url and call the func with async await
-    if (data === undefined) { // checked wrong value in input and wrong response from data
+    if (data === undefined) { //  wrong url, response.status= 404 
       resultEl.innerHTML = resultText;
       mealList.innerHTML = col;
       startPageEl.style.display = 'block';
@@ -68,8 +68,8 @@ const foodApi = async (url) => {
     if (!response.ok) {  // checked if there is an error from API
       throw new Error('There is some error on API.')
     }
-    const data = await response.json(); //get the data as JSON format 
-    if (data.meals === null) { // checked if the ingredient is wrong and throw an error
+    const data = await response.json(); //get the data as JSON format
+    if (data.meals === null) { // checked if the ingredient is wrong and throw an error, (eggff)
       col = '';
       throw new Error('Please check your ingredient!');
     }
@@ -146,7 +146,7 @@ const renderError = (err) => {
 }
 
 
-const favArr = [];
+const favArr = []; // adding fav meals as an object, check to avoid adding same meal again
 let favList = '';
 const addFavourate = (mealName, mealId, mealImg) => {
   const obj = {
