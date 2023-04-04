@@ -1,11 +1,11 @@
 Welcome to Jorien Chef's Kitchen!
 
-You can visit the site : https://mysr3809.github.io/food-recipe-API/
+You can visit the site with this link : https://mysr3809.github.io/food-recipe-API/
 
 I wanted to create a website about meals and recipes.
 
 In this project I have used:
- Fetch API,
+- Fetch API,
 - Error Handling,
 - LocalStorage,
 - DOM manipulation,
